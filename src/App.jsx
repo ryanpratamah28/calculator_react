@@ -22,7 +22,7 @@ function reducer(state, { type, payload }) {
 				};
 			}
 
-			if (payload.digit === "0" && state.currentOperand === "0") {
+			if (payload.digit === "." && state.currentOperand === null) {
 				return state;
 			}
 
@@ -67,7 +67,12 @@ function reducer(state, { type, payload }) {
 			};
 
 		case ACTIONS.CLEAR:
-			return {};
+			return {
+				...state,
+				currentOperand: "0",
+				previousOperand: null,
+				operation: null
+			};
 
 		case ACTIONS.DELETE_DIGIT:
 			if (state.overwrite) {
